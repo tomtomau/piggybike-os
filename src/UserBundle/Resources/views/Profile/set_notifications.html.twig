@@ -1,0 +1,13 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Notifications</h2>
+    <p class="lead">
+        PiggyBike sends an email out at the end of the month to summarise how much money you've saved. If you haven't ridden
+        for the month, no email will be sent. You can opt-out of these emails at any time.
+    </p>
+
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+        {{ form_row(form.monthlyEmailOptOut) }}
+    {{ form_end(form) }}
+{% endblock window %}

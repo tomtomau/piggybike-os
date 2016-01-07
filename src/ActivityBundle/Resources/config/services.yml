@@ -1,0 +1,47 @@
+#services:
+#    # Security
+#    user_bundle.security.oauth_user_provider:
+#        class: UserBundle\Security\OAuthUserProvider
+#        arguments:
+#            - "@user_bundle.user_repository"
+#
+#    # Repositories
+#
+#    user_bundle.user_repository:
+#        class: Doctrine\ORM\EntityRepository
+#        factory_service: doctrine.orm.default_entity_manager
+#        factory_method: getRepository
+#        arguments:
+#            - UserBundle\Entity\User
+
+services:
+    # Repositories
+
+    activity.activity_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - ActivityBundle\Entity\Activity
+
+    activity.balance:
+        class: ActivityBundle\Services\BalanceService
+        arguments:
+            - "@activity.activity_repository"
+            - "@reward.reward_repository"
+
+    activity.json_transformer:
+        class: ActivityBundle\Services\JSONToActivityTransformer
+
+    activity.classifier:
+        class: ActivityBundle\Services\ClassifierService
+
+    activity.activity_sync:
+        class: ActivityBundle\Services\ActivitySyncService
+        arguments:
+            - "@activity.activity_repository"
+            - "@activity.json_transformer"
+            - "@activity.classifier"
+            - "@mixpanel"
+            - "@strava.activity_service"
+            - "@user_bundle.user_repository"

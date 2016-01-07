@@ -1,0 +1,20 @@
+services:
+    mixpanel:
+        class: MixpanelBundle\Services\MixpanelService
+        arguments:
+            - "%mixpanel_token%"
+
+    mixpanel.mixpanel_listener:
+        class: MixpanelBundle\EventListener\MixpanelListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate }
+        arguments:
+            - "@mixpanel"
+            - "@security.token_storage"
+            - "@activity.balance"
+
+    mixpanel.twig_extension:
+        class: MixpanelBundle\Twig\MixpanelExtension
+        public: false
+        tags:
+            - { name: twig.extension }

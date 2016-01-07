@@ -1,0 +1,19 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Set Home</h2>
+    <p class="lead">
+        Manually enter the latitude and longitude for home, or choose from one of the locations we've detected from Strava.
+    </p>
+
+    {% include 'UserBundle:Profile:_progress.html.twig' %}
+
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+        {{ form_row(form.homeLat) }}
+        {{ form_row(form.homeLng) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+    {% include 'UserBundle:Profile:_suggested_locations.html.twig' with { form_lat: form.homeLat, form_lng: form.homeLng, scope: "home" } %}
+
+
+{% endblock window %}

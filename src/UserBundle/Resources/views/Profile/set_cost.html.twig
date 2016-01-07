@@ -1,0 +1,36 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Set average one-way cost</h2>
+    <p class="lead">So we can tally up how much you're saving, how much would it usually generally cost you to commute, one-way, if you
+        weren't riding a bike?</p>
+
+    <p class="quote">
+        Example: A one-way bus ticket cost $3.93 - this is my average one-way cost.
+    </p>
+
+    <p class="quote">
+        Example: Parking at work costs me $5 per day, and I estimate that other costs (fuel/gas and running costs) adds an extra $5 per day.
+        With a daily cost of $10.00 to commute by car, my average one-way would be $5.00.
+    </p>
+
+    {% include 'UserBundle:Profile:_progress.html.twig' %}
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+        {{ form_row(form.currency) }}
+        {{ form_row(form.cost) }}
+
+        {% if form.growth_optin is not null %}
+            {{ form_row(form.growth_optin) }}
+        {% endif %}
+
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+    {% if form.growth_optin is not null %}
+        <p class="quote">
+            *Selecting this box will mean on the first ride that we auto-classify as a commute for you,
+            we will add <strong>#PiggyBike</strong> to the end of the name. We will only do it on one ride. It helps
+            more people find out about PiggyBike, but it's your decision to make whether you want to allow this.
+        </p>
+    {% endif %}
+{% endblock window %}

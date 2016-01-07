@@ -1,0 +1,89 @@
+@import "../lib/normalize.less";
+@import "../lib/buttons.less";
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,700,600|Raleway:400,100,300,200,500,700);
+
+* {
+  box-sizing: border-box;
+}
+
+.source(){
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.raleway(){
+  font-family: 'Raleway', sans-serif;
+}
+
+html, body
+{
+  height: 100%;
+  .source();
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 400;
+  margin: 0;
+}
+
+.hero
+{
+  height: 100%;
+  display: block;
+  padding: 15px;
+  position: relative;
+  background: black;
+}
+
+.hero-background {
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-image: url('../../images/app/images/homepage-background.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+.hero-overlay
+{
+  color: white;
+  width: 100%;
+  display: table;
+  min-height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-inner{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+
+  h1 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    .raleway();
+  }
+
+  h2 {
+    margin-bottom: 25px;
+  }
+}
+
+.clear{
+  clear: both;
+}
+
+.mixpanel {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -57px;
+}

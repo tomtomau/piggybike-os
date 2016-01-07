@@ -1,0 +1,27 @@
+services:
+    user_bundle.mailer_generator:
+        class: UserBundle\Services\MailerGeneratorService
+        arguments:
+            - "%mixpanel_token%"
+            - "@activity.balance"
+            - "@activity.activity_repository"
+            - "@router"
+
+    # Security
+    user_bundle.security.oauth_user_provider:
+        class: UserBundle\Security\OAuthUserProvider
+        arguments:
+            - "@user_bundle.user_repository"
+            - "@mixpanel"
+            - "@session"
+            - "@bcc_resque.resque"
+            - "@monolog.logger.slackinfo"
+
+    # Repositories
+
+    user_bundle.user_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - UserBundle\Entity\User

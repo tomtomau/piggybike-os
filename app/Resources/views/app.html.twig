@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}PiggyBike{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ asset('css/app/main.css') }}"/>
+
+    <!-- start Mixpanel -->
+
+    <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+            for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+        mixpanel.init("{{ mixpanel_token }}");</script>
+
+    <!-- end Mixpanel -->
+    {% include '_tracking.html.twig' %}
+    {% block mixpanel %}
+        <script>
+            {% if app.user %}
+            mixpanel.identify({{ app.user.id }});
+            {% endif %}
+
+        </script>
+    {% endblock mixpanel %}
+
+    {% include '_favicon.html.twig' %}
+</head>
+<body>
+{% block body %}
+<div class="container">
+    <div class="sidebar">
+        <h1><a href="{{ path('activity.activity.list') }}">piggy.bike</a></h1>
+            <div class="icon-group desktop-only">
+                <a href="{{ path('reward.reward.list') }}" class="balance" title="View Rewards">
+
+                    <div class="icon logo">
+                        <img src="{{ asset('images/app/images/logo.svg') }}" alt="" class="tiny-logo"/>
+                    </div>
+
+                    <div class="icon balance-number">
+                        <h3>
+                            {{ render(controller('ActivityBundle:Balance:printBalance')) }}
+                        </h3>
+                    </div>
+                </a>
+                <div class="tweet">
+                    <h4>Balance</h4>
+                    <a class="btn btn-default btn-smaller" href="{{ path('activity.share.share') }}" title="Share"><span class="icon icon-bicycle"></span>Share</a>
+                </div>
+            </div>
+
+
+        {% if app.user.isSetup %}
+        <a id="nav-toggle" href="javascript:void(0)">
+            <span class="icon icon-menu"></span>
+            {#<span class="new-dot"></span>#}
+        </a>
+        <ul class="nav" id="nav-target">
+            <li><a href="{{ path('activity.activity.list') }}">Activity List</a></li>
+            <li><a href="{{ path('reward.reward.list') }}">Purchases</a></li>
+            <li><a href="{{ path('reward.promo.list') }}">Promos
+                    {{ render(controller('RewardBundle:Promo:getPromoCount')) }}
+                </a></li>
+            <li><a href="{{ path('user.profile.view') }}">{{ app.user.isSetup ? "Settings" : "Setup" }}</a></li>
+
+            {% if app.user.isAdmin and false %}
+                <li><a href="{{ path('admin.index') }}">Admin</a></li>
+                <li><a href="{{ path('admin.product.list') }}">Products</a></li>
+            {% endif %}
+        </ul>
+        {% else %}
+            {% include 'UserBundle:Profile:_progress.html.twig' with { progress_class: 'desktop-only' }%}
+        {% endif %}
+        <div class="sinker">
+            <ul class="sinker-nav">
+                <li>
+                    <style>.ig-b- { display: inline-block; }
+                        .ig-b- img { visibility: hidden; }
+                        .ig-b-:hover { background-position: 0 -60px; } .ig-b-:active { background-position: 0 -120px; }
+                        .ig-b-v-24 { width: 137px; height: 24px; background: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24.png) no-repeat 0 0; }
+                        @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+                            .ig-b-v-24 { background-image: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24@2x.png); background-size: 160px 178px; } }</style>
+                    <a href="https://www.instagram.com/piggybike/?ref=badge" class="ig-b- ig-b-v-24"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram" /></a>
+                </li>
+                <li>
+                    <div class="fb-like" data-href="https://www.facebook.com/ridewithpiggybike/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                </li>
+                <li>
+                    <a class="twitter-follow-button"
+                       href="https://twitter.com/PiggyBike">
+                        Follow @PiggyBike</a>
+                </li>
+                <li>
+                    <a href="mailto:tom@piggy.bike">Support</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="window">
+        {% for flash_message in app.session.flashbag.get('notice') %}
+            <div class="flash">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashbag.get('success') %}
+            <div class="flash">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% block window '' %}
+    </div>
+</div>
+{% endblock body %}
+
+<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+
+{% block javascripts %}
+    <script src="{{ asset('libs/components.js') }}"></script>
+    <script src="{{ asset('js/polyline.js') }}"></script>
+    <script src="{{ asset('js/nav.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/d3.min.js') }}"></script>
+    <script src="{{ asset('js/nv.d3.js') }}"></script>
+{% endblock %}
+</body>
+</html>

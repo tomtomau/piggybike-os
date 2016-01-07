@@ -1,0 +1,29 @@
+<h3>Detected From Strava:</h3>
+{% if suggested_locations is empty %}
+    <p>We haven't been able to load any rides from Strava yet! Have you ridden since the start of this year? Try reloading the page, sometimes the activities take a while to sync - you can also send an email to
+        <a href="mailto:tom@piggy.bike">tom@piggy.bike</a> to take a look.</p>
+{% else %}
+<p>We've automatically imported some of your recent rides and aggreggated the start/end locations for you.
+    Click "Use Location" to fill out the form with the latitude and longitude coordinates.</p>
+<div class="suggested-locations">
+    {% for suggested_location in suggested_locations %}
+        <div class="suggested-location">
+            <div class="map-image"
+                 data-zoom="14"
+                 data-size="400x230"
+                 data-markers="{{ [suggested_location.lat, suggested_location.lng] | json_encode | escape }}"
+                 data-error="0.005"
+                    >
+            </div>
+            {#<img src="https://maps.googleapis.com/maps/api/staticmap?zoom=14&sensor=false&size=400x230&markers={{ suggested_location.lat ~ "," ~ suggested_location.lng }}" alt="Suggested location"/>#}
+            <p>{{ suggested_location.lat }}, {{ suggested_location.lng }} ({{ suggested_location.location_count }} activities)</p>
+            <a href="javascript:void(0)" class="autofill-location btn btn-success"
+               data-target-lat="{{ form_lat.vars.id }}" data-target-lng="{{ form_lng.vars.id }}"
+               data-lat="{{ suggested_location.lat }}" data-lng="{{ suggested_location.lng }}"
+                    >
+                Use location as {{ scope }}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

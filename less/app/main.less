@@ -1,0 +1,50 @@
+@import "../lib/normalize.less";
+@import "../lib/vars";
+@import "../lib/buttons";
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,700,600|Raleway:400,100,300,200,500,700);
+
+* {
+  box-sizing: border-box;
+}
+
+.source(){
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.raleway(){
+  font-family: 'Raleway', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+.container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  table-layout: fixed;
+  overflow: hidden;
+
+  .sidebar {
+    background: @sidebarColor;
+    height: 100%;
+    width: 350px;
+  }
+
+  .window {
+    background: blue;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    overflow: scroll;
+  }
+}
+
+.sidebar {
+  padding: 10px;
+  h1 {
+    color: white;
+  }
+}

@@ -1,0 +1,10 @@
+.idea
+bower_components/
+app/config/parameters.yml
+.DS_Store
+app/cache/*
+app/logs/*
+vendor/*
+node_modules/*
+npm-debug.log
+web/bundles/*

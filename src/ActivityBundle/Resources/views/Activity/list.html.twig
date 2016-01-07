@@ -1,0 +1,44 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Activity List</h2>
+    <p class="lead">Here's a list of your activities we've automatically synced and classified from Strava. You can update
+    the classifications and amount saved!</p>
+
+    <div class="activity-list-balance mobile-only">
+        <div class="icon-group">
+            <a href="{{ path('activity.share.share') }}" class="balance" title="Share on Twitter">
+
+                <div class="icon logo">
+                    <img src="{{ asset('images/app/images/logo.svg') }}" alt="" class="tiny-logo"/>
+                </div>
+                <div class="icon balance-number">
+                    <h3>
+                        {{ render(controller('ActivityBundle:Balance:printBalance')) }}
+                    </h3>
+                </div>
+            </a>
+            <div class="tweet">
+                <h4>Balance</h4>
+                <a class="btn btn-default btn-smaller" href="{{ path('activity.share.share') }}" title="Share"><span class="icon icon-bicycle"></span>Share</a>
+            </div>
+        </div>
+    </div>
+
+    <p class="pagination-header">Showing {{ (page-1)*per_page+1 }} - {{ min((page)*per_page, total_count) }} of {{ total_count }} activities</p>
+
+    <div class="strava-cards">
+        {% for activity in activities %}
+            {% include 'ActivityBundle:Activity:_card.html.twig' with { activity: activity } %}
+        {% endfor %}
+    </div>
+    
+    <div class="pagination">
+        {% if show_previous %}
+            <a href="{{ path('activity.activity.list', { pageId: page-1 }) }}" class="btn btn-default">Previous Page</a>
+        {% endif %}
+        {% if show_next %}
+            <a href="{{ path('activity.activity.list', { pageId: page+1 }) }}" class="btn btn-default">Next Page</a>
+        {% endif %}
+    </div>
+{% endblock window %}

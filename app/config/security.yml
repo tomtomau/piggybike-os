@@ -1,0 +1,47 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory:
+            memory: ~
+        oauth_user:
+            id: user_bundle.security.oauth_user_provider
+
+    firewalls:
+        secured_area:
+            anonymous: ~
+            oauth:
+                resource_owners:
+                    strava:           "/login/check-strava"
+                login_path:        /
+                use_forward:       false
+                failure_path:      /
+                default_target_path: /app/activity/list
+
+                oauth_user_provider:
+                    service: user_bundle.security.oauth_user_provider
+
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+          # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/app/, roles: ROLE_USER }
+        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/resque, roles: ROLE_ADMIN }
+
+

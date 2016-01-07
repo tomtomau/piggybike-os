@@ -1,0 +1,14 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h1>Edit Product</h1>
+
+    <p class="lead">{{ product.name }}, <a href="{{ product.url }}">link</a></p>
+    <img src="{{ product.image }}" alt="{{ product.name }}">
+
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+
+{% endblock window %}

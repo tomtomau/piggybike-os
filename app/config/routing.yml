@@ -1,0 +1,38 @@
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+#hwi_oauth_login:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#    prefix:   /login
+
+strava_login:
+    path: /login/check-strava
+
+user:
+    resource: '@UserBundle/Resources/config/routing.yml'
+    prefix: /app/profile
+
+activity:
+    resource: '@ActivityBundle/Resources/config/routing.yml'
+    prefix: /app/activity
+
+reward:
+    resource: '@RewardBundle/Resources/config/routing.yml'
+    prefix: /app/purchases
+
+strava:
+    resource: '@StravaBundle/Resources/config/routing.yml'
+    prefix: /strava
+
+BCCResqueBundle:
+    resource: "@BCCResqueBundle/Resources/config/routing.xml"
+    prefix:   /resque
+
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix: /admin
+
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"

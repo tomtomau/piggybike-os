@@ -1,0 +1,13 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Add Purchase</h2>
+    <p class="lead">You have {{ render(controller('ActivityBundle:Balance:printBalance')) }} to spend!</p>
+
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.cost) }}
+    {{ form_end(form) }}
+
+{% endblock window %}

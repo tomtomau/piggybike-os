@@ -1,0 +1,17 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h1>Setup Complete</h1>
+    <p class="lead">Awesome, we've started classifying your rides since the start of this year and a balance will be generated for you shortly!</p>
+
+    <a class="btn btn-success" href="{{ path('activity.activity.list') }}">Go to Activity List</a>
+{% endblock window %}
+
+{% block mixpanel %}
+        {{ parent() }} {# This fires off identify #}
+        <script>
+            if (typeof mixpanel != "undefined") {
+                mixpanel.people.set({ "Setup": true });
+            }
+        </script>
+{% endblock mixpanel %}

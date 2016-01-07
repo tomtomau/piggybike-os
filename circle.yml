@@ -1,0 +1,24 @@
+machine:
+  php:
+    version: 7.0.0RC7
+  ruby:
+    version: 2.2.2
+
+dependencies:
+  pre:
+    - cp $HOME/$CIRCLE_PROJECT_REPONAME/app/config/parameters.yml.circle.dist $HOME/$CIRCLE_PROJECT_REPONAME/app/config/parameters.yml
+  post:
+    - gem install capifony
+test:
+  override:
+    - SYMFONY_DEPRECATIONS_HELPER="weak" phpunit -c app/
+
+deployment:
+  production:
+    branch: production
+    commands:
+      - cap -S revision=$CIRCLE_SHA1 deploy
+
+notify:
+  webhooks:
+    - url: http://app.statuslight.io/circleci/webhook/1

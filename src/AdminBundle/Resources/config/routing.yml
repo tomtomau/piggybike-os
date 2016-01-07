@@ -1,0 +1,19 @@
+admin.index:
+    path: /
+    defaults: { _controller: AdminBundle:Admin:index }
+
+admin.product.list:
+    path: /products/list
+    defaults: { _controller: AdminBundle:Product:index }
+
+admin.product.edit:
+    path: /products/edit/{id}
+    defaults: { _controller: AdminBundle:Product:edit }
+
+admin.product.categories:
+    path: /products/categories
+    defaults: { _controller: AdminBundle:Product:categories }
+
+admin.trigger.sync_pushys:
+    path: /sync-pushys
+    defaults: { _controller: AdminBundle:Admin:syncCF }

@@ -1,0 +1,17 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Set work</h2>
+    <p class="lead">
+        Manually enter the latitude and longitude for work, or choose from one of the locations we've detected from Strava.
+    </p>
+
+    {% include 'UserBundle:Profile:_progress.html.twig' %}
+
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+    {{ form_row(form.workLat) }}
+    {{ form_row(form.workLng) }}
+    {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+    {% include 'UserBundle:Profile:_suggested_locations.html.twig' with { form_lat: form.workLat, form_lng: form.workLng, scope: "work" } %}
+{% endblock window %}

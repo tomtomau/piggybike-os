@@ -1,0 +1,188 @@
+.strava-cards {
+  font-size: 0;
+
+  .piggybike-card, .strava-card {
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
+    background: #f3f3f3;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    font-size: initial;
+  }
+
+  .piggybike-card, .strava-card {
+
+    .box-shadow(~"2px 1px 1px 1px #B1ACAC");
+
+    .gopher {
+      position: absolute;
+      top: 0;
+
+      span {
+        padding: 5px 10px;
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: 600;
+        background: #1D66D4;
+        color: white;
+        border-radius: 0 0 5px 0;
+      }
+    }
+
+
+    .title, .earnings, .buttons, img {
+      display: block;
+      text-align: center;
+      width: 100%;
+
+    }
+
+    .title {
+      padding: 15px 0 20px;
+
+      h3 {
+        font-family: inherit;
+        display: inline;
+      }
+
+      .refresh-activity {
+        display: inline-block;
+        color: black;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #333;
+        }
+      }
+    }
+
+    .earnings {
+      padding: 10px 0;
+    }
+
+    .earnings {
+      &.commute {
+        background: #2FAD2F;
+        color: white;
+      }
+
+      &.no-commute {
+        background: #484848;
+        color: white;
+        text-transform: lowercase;
+      }
+      h4 {
+        font-size: 24px;
+        .source();
+      }
+    }
+
+    .buttons {
+      font-size: 0;
+
+      > a {
+        display: inline-block;
+        border-radius: 0px;
+
+        // Set of two
+        &:nth-child(1):nth-last-child(2){
+          &, & ~ * {
+            width: 50%;
+          }
+        }
+        // Set of one
+        &:nth-child(1):nth-last-child(1){
+          &, & ~ * {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .piggybike-card {
+    height: 371px;
+
+    div.background {
+      position: absolute;
+      z-index: 0;
+      width: 100%;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-size: cover;
+      background-position: 50%;
+    }
+
+    > a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: table;
+      text-decoration: none;
+      color: white;
+
+      .underlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #333;
+        z-index: 1;
+        opacity: 0.5;
+
+        .transition(opacity 0.3s);
+      }
+
+      &:hover {
+        .underlay {
+          .opacity(0.6);
+        }
+      }
+    }
+
+    .center-row {
+      display: table-cell;
+      width: 100%;
+      vertical-align: middle;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title span {
+      font-size: 36px;
+    }
+
+    .buttons {
+      position: absolute;
+      bottom: 0;
+      z-index: 5;
+    }
+  }
+}
+
+.banner-ad {
+  display: block;
+  margin: 1rem 0 2rem;
+}
+
+@media screen and (min-width: 768px) and (max-width: 769px) {
+  .strava-cards .strava-card {
+    max-width: 349px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .strava-cards .strava-card {
+    width: 100%;
+    margin-right: 0;
+  }
+}

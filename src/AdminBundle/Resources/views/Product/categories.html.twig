@@ -1,0 +1,21 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h1>Product Categories</h1>
+
+    {% for key,category in categories %}
+        <div class="category">
+            <h3>{{ category.title|capitalize }}</h3>
+            <a href="{{ category.url }}">{{ category.url }}</a>
+            <h4>Products:</h4>
+            {% if cat_products[key] | length %}
+                {% for product in cat_products[key] %}
+                    <img src="{{ product.image }}" alt="{{ product.name }}" style="width: 150px; height: 150px;">
+                    <a href="{{ product.url }}">{{ product.name }}</a> - <a href="{{ path('admin.product.edit', { id: product.id}) }}">Edit</a>
+                {% endfor %}
+            {% else %}
+                <p>No products...</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock window %}

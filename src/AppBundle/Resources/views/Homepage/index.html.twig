@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-overlay">
+            <div class="hero-inner">
+                <img src="{{ asset('images/app/images/logo.svg') }}" alt="piggy.bike" class="logo"/>
+                <h1>piggy.bike</h1>
+                <h2>automatically track money saved from cycling to work with Strava</h2>
+
+                {% if app.user is not null %}
+                    <a href="{{ app.user.isSetup() ? path('activity.activity.list') : path('user.onboard.index') }}" class="btn btn-default">
+                        See Savings
+                    </a>
+                {% else %}
+                    <a href="{{ path('hwi_oauth_service_redirect', { 'service': 'strava' }) }}" class="btn btn-strava">
+                        <img src="{{ asset('images/app/images/login-strava.png') }}" alt="Login with Strava" />
+                    </a>
+                {% endif %}
+
+                <div class="clear"></div>
+
+                <div class="homepage-sinker">
+                    <style>.ig-b- { display: inline-block; margin-bottom: 10px; }
+                        .ig-b- img { visibility: hidden; }
+                        .ig-b-:hover { background-position: 0 -60px; } .ig-b-:active { background-position: 0 -120px; }
+                        .ig-b-v-24 { width: 137px; height: 24px; background: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24.png) no-repeat 0 0; }
+                        @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+                            .ig-b-v-24 { background-image: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24@2x.png); background-size: 160px 178px; } }</style>
+
+                    <a href="https://www.instagram.com/piggybike/?ref=badge" class="ig-b- ig-b-v-24"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram" /></a>
+
+                    <div class="fb-like" data-href="https://www.facebook.com/ridewithpiggybike/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
+                    <img src="http://cdn.mxpnl.com/site_media/images/partner/badge_blue.png" alt="Mixpanel Partner" class="mixpanel"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        if (typeof mixpanel != "undefined")
+        {
+            mixpanel.track('Home');
+        }
+    </script>
+{% endblock body %}

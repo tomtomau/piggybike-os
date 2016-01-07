@@ -1,0 +1,89 @@
+<div class="strava-card">
+    <div class="gopher">
+        <span>{{ activity.startDateLocal|date('d M') }}</span>
+    </div>
+    <img src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&size=400x230&path=weight:3%7Ccolor:red%7Cenc:{{ activity.polyline }}&key={{ google_maps_key }}" alt=""/>
+    <div class="title">
+        <h3>{{ activity.name }}</h3>
+        <a class="refresh-activity" href="{{ path('activity.activity.refresh', { id: activity.id }) }}" title="Refresh Title">
+            <span class="icon icon-arrows-ccw"></span>
+        </a>
+    </div>
+        {% if activity.isCommute %}
+        <div class="earnings commute">
+            <h4>{{ app.user.currency|currency_symbol }}{{ (activity.value|number_format(2)) }}</h4>
+        </div>
+        {% else %}
+        <div class="earnings no-commute">
+            <h4>Not a commute</h4>
+        </div>
+        {% endif %}
+    <div class="buttons">
+        <a href="https://strava.com/activities/{{ activity.resourceId }}" class="btn btn-smaller btn-orange">View Strava</a>
+        <a href="{{ path('activity.activity.edit', { id: activity.id}) }}" class="btn btn-smaller btn-default">Edit</a>
+    </div>
+</div>
+
+{#{% if activity.isManual %}#}
+                {#<div class="activity {{ activity.isCommute ? 'positive' : 'neutral' }}">#}
+                    {#{% if activity.isCommute %}#}
+                        {#<div class="earnings">#}
+                            {#<div class="center">#}
+                                {#<h3 class="center-inner">{{ app.user.currency|currency_symbol }}{{ (activity.value|number_format(2)) }}</h3>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#{% endif %}#}
+                    {#<div class="details">#}
+                        {#<div class="center">#}
+                            {#<div class="center-inner">#}
+                                {#<h3>{{ activity.name }}</h3>#}
+                                {#<div class="meta">#}
+                            {#<span>{{ activity.startDateLocal|date('g:ia') }}</span> |#}
+                                    {#<span>{{ activity.classificationAsString }}</span>#}
+                                    {#{% if activity.isCommute %}#}
+                                        {#| <span>{{ app.user.currency|currency_symbol }}{{ (activity.value|number_format(2)) }}</span>#}
+                                    {#{% endif %}#}
+                                {#</div>#}
+                                {#<div class="actions">#}
+                                    {#<a href="https://strava.com/activities/{{ activity.resourceId }}" class="btn btn-smaller btn-orange">View Strava</a>#}
+                                    {#<a href="{{ path('activity.activity.edit', { id: activity.id}) }}" class="btn btn-smaller btn-default">Edit</a>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#{% else %}#}
+                {#<div class="activity {{ activity.isCommute ? 'positive' : 'neutral' }}">#}
+                {#<div class="preview">#}
+                    {#<img src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&size={{ activity.isCommute ? '400x230' : '400x150' }}&path=weight:3%7Ccolor:red%7Cenc:{{ activity.polyline }}&key={{ google_maps_key }}" alt=""/>#}
+                {#</div>#}
+                {#{% if activity.isCommute %}#}
+                    {#<div class="earnings">#}
+                        {#<div class="center">#}
+                            {#<h3 class="center-inner">{{ app.user.currency|currency_symbol }}{{ (activity.value|number_format(2)) }}</h3>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#{% endif %}#}
+                {#<div class="details">#}
+                    {#<div class="center">#}
+                        {#<div class="center-inner">#}
+                            {#<h3>{{ activity.name }}</h3>#}
+                            {#<div class="meta">#}
+                            {#<span>{{ activity.startDateLocal|date('g:ia') }} - {{ activity.endDateLocal|date('g:ia') }}#}
+                                {#({{ (activity.elapsedTime/(60*60))>=1 ? (activity.elapsedTime/(60*60))|round(0, 'floor') ~ "h" : "" }}{{ ((activity.elapsedTime%(60*60))/60)|round(0, 'floor') }}m)#}
+                                {#({{ activity.startDateLocal|date('d M') }})#}
+                            {#</span> |#}
+                                {#<span>{{ activity.classificationAsString }}</span>#}
+                                {#{% if activity.isCommute %}#}
+                                    {#| <span>{{ app.user.currency|currency_symbol }}{{(activity.value|number_format(2)) }}</span>#}
+                                {#{% endif %}#}
+                            {#</div>#}
+                            {#<div class="actions">#}
+                                {#<a href="https://strava.com/activities/{{ activity.resourceId }}" class="btn btn-smaller btn-orange">View Strava</a>#}
+                                {#<a href="{{ path('activity.activity.edit', { id: activity.id}) }}" class="btn btn-smaller btn-default">Edit</a>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+            {#{% endif %}#}

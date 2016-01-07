@@ -1,0 +1,11 @@
+homepage:
+    path: /
+    defaults: { _controller: AppBundle:Homepage:index }
+
+referral:
+    path: /{referrer}
+    defaults: { _controller: AppBundle:Referral:index }
+
+referral_trailing_slash:
+    path: /{referrer}/
+    defaults: { _controller: AppBundle:Referral:index }

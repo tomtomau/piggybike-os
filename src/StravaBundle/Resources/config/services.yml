@@ -1,0 +1,15 @@
+services:
+    strava.client_factory:
+        class: StravaBundle\Services\ClientFactory
+
+    strava.athlete_service:
+        class: StravaBundle\Services\AthleteService
+
+    strava.activity_service:
+        class: StravaBundle\Services\ActivityService
+
+    strava.webhook_service:
+        class: StravaBundle\Services\WebhookService
+        arguments:
+            - "@bcc_resque.resque"
+            - "@logger"

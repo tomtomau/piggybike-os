@@ -1,0 +1,41 @@
+<ul class="setup-progress {{ progress_class|default('mobile-only') }}">
+    <li class="header">
+        <span>Setup Checklist</span>
+    </li>
+    <li class="{{ app.user.hasSetHome() ? 'active' : 'inactive' }}">
+        {% if app.user.hasSetHome() %}
+            <span class="icon icon-check"></span>
+            <span>Set Home</span>
+
+        {% else %}
+            <a href="{{ path('user.profile.set_home') }}">
+                <span class="icon icon-check-empty"></span>
+                <span>Set Home</span>
+            </a>
+
+        {% endif %}
+    </li>
+    <li class="{{ app.user.hasSetWork() ? 'active' : 'inactive' }}">
+        {% if app.user.hasSetWork() %}
+            <span class="icon icon-check"></span>
+            <span>Set Work</span>
+        {% else %}
+            <a href="{{ path('user.profile.set_work') }}">
+                <span class="icon icon-check-empty"></span>
+                <span>Set Work</span>
+            </a>
+        {% endif %}
+
+    </li>
+    <li class="{{ app.user.hasSetCost() ? 'active' : 'inactive' }}">
+        {% if app.user.hasSetCost() %}
+            <span class="icon icon-check"></span>
+            <span>Set Cost</span>
+        {% else %}
+            <a href="{{ path('user.profile.set_cost') }}">
+                <span class="icon icon-check-empty"></span>
+                <span>Set Cost</span>
+            </a>
+        {% endif %}
+    </li>
+</ul>

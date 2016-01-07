@@ -1,0 +1,58 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h1>Admin page</h1>
+    <h2>{{ setup_user_count }}/{{ users|length }} setup users</h2>
+    <a href="{{ path('admin.trigger.sync_pushys') }}" class="btn btn-success">Sync Pushys</a>
+    <div id="chart">
+        <svg height="800" width="600" style="height: 500px;"></svg>
+    </div>
+    <table class="styled-table">
+        {% for user in users %}
+            <tr>
+                <td>
+                    <a href="https://strava.com/athletes/{{ user.username }}">
+                        {{ user.firstName }} {{ user.admin ? "(Admin)" : "" }}
+                    </a>
+                </td>
+                <td>
+                    {{ user.city }}, {{ user.state }}, {{ user.country }}
+                </td>
+                <td>
+                    {{ user.cost }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock window %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var data = {{ user_chart_data | json_encode | raw }};
+
+        nv.addGraph(function() {
+            var chart = nv.models.lineChart()
+                            .x(function(d) { return d[0] })
+                            .y(function(d) { return d[1] }) //adjusting, 100% is 1.00, not 100 as it is in the data
+                            .color(d3.scale.category10().range())
+                            //.useInteractiveGuideline(true)
+                    ;
+
+            chart.xAxis
+                    .tickFormat(function(d) {
+                        return d3.time.format('%x')(new Date(d))
+                    });
+
+            d3.select('#chart svg')
+                    .datum(data)
+                    .call(chart);
+
+            //TODO: Figure out a good way to do this automatically
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+    </script>
+{% endblock javascripts %}

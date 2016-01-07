@@ -1,0 +1,13 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Edit activity</h2>
+    <p class="lead">If we managed to accidentally detect this as a commute, you can update it's classification and
+            value here.
+    </p>
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+    <a href="{{ path('activity.activity.list') }}" class="btn btn-neutral">Back to Activity List</a>
+{% endblock window %}

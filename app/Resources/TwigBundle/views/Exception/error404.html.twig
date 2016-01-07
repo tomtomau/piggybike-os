@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block mixpanel %}
+    <script>
+        mixpanel.track('404');
+    </script>
+{% endblock mixpanel %}
+{% block body %}
+<div class="hero">
+    <div class="hero-background"></div>
+    <div class="hero-overlay">
+        <div class="hero-inner">
+            <h1>uh oh!</h1>
+            <h2>I'm not sure what page you're looking for!</h2>
+            <a class="btn btn-default" href="{{ path('homepage') }}">Home</a>
+            </div>
+    </div>
+</div>
+{% endblock body %}

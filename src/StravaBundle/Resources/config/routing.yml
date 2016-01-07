@@ -1,0 +1,9 @@
+strava.webhook.handle:
+    path: /webhook
+    methods: [POST]
+    defaults: { _controller: StravaBundle:Webhook:handle }
+
+strava.webhook.challenge:
+    path: /webhook
+    methods: [GET]
+    defaults: { _controller: StravaBundle:Webhook:challenge }

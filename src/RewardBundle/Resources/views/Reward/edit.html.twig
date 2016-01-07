@@ -1,0 +1,13 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Edit Purchase</h2>
+    <p class="lead">Here you can edit your purchase details. Click <a href="{{ path('reward.reward.delete', { id: reward.id }) }}">here</a> to delete the purchase.</p>
+    {{ form_start(form, { attr: { class: 'form-table'}} ) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.cost) }}
+    {{ form_end(form) }}
+
+    <a href="{{ path('reward.reward.list') }}" class="btn btn-neutral">Return to purchases</a>
+{% endblock window %}

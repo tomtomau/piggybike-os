@@ -1,0 +1,20 @@
+<div class="piggybike-card">
+    <div class="background" style="background-image: url('{{ product.image }}');">
+    </div>
+    <a href="{{ category.url }}" onclick="cfclickcat(this)" data-category="{{ category.title }}" target="_blank">
+        <div class="underlay"></div>
+        <div class="center-row">
+            <div class="title">
+                <span>{{ category.title | capitalize }}</span>
+            </div>
+            <div class="subtitle">
+                <span class="btn btn-default">
+                    From A${{ product.priceSale }}
+                </span>
+            </div>
+        </div>
+    </a>
+    <div class="buttons">
+        <a href="{{ category.url }}" class="btn btn-default">View on Pushys.com.au</a>
+    </div>
+</div>

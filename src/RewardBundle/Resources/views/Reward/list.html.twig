@@ -1,0 +1,32 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>List Purchases</h2>
+    <p class="lead">Here you can list the purchases you've made related to your commute to work. Looking for a deal? Checkout the
+        <a href="{{ path('reward.promo.list') }}">Promos</a> page to check coupons and promotions.
+    </p>
+    <a href="{{ path('reward.reward.new') }}" class="btn btn-default list-btn">Add Purchase</a>
+
+    {% if rewards|length %}
+    <div class="rewards">
+        {% for reward in rewards %}
+            <div class="reward">
+                <div class="cost">
+                    <div class="center">
+                        <h3 class="center-inner">{{ "$%01.2f"|format(reward.cost) }}</h3>
+                    </div>
+                </div>
+                <div class="details">
+                    <h3>{{ reward.title }}</h3>
+                    <h4>{{ reward.date|date('j M y') }}</h4>
+                </div>
+                <div class="controls">
+                    <a href="{{ path('reward.reward.edit', { id: reward.id }) }}" class="btn btn-default">Edit</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p class="lead">No purchases have been added into PiggyBike.</p>
+    {% endif %}
+{% endblock window %}

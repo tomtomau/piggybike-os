@@ -1,0 +1,37 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h1>Products</h1>
+    <p class="lead">Here's a list of categories, search below or look at categories <a href="{{ path('admin.product.categories') }}">here</a></p>
+    
+    {{ form_start(search_form, { attr: { class: 'form-table'}} ) }}
+        {{ form_row(search_form.query) }}
+        {{ form_row(search_form.query2) }}
+        {{ form_row(search_form.search) }}
+    {{ form_end(search_form) }}
+
+    {% if product_search.isSearched %}
+        <p class="lead">There are {{ products|length }} matching your query.</p>
+    {% else %}
+        <p class="lead">There are {{ products|length }} products from Commission Factory / Pushys.</p>
+    {% endif %}
+
+    {% if product_search.isSearched %}
+        {% set limited_products = products|slice(0, 50) %}
+        <table>
+            {% for product in limited_products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td><a href="{{ product.url }}">View</a></td>
+                    <td>{{ null != product.category ? product.category : '' }}</td>
+                    {#<td><img src="{{ product.image }}" alt="{{ product.name }}" style="width: 200px; height: 200px;" /></td>#}
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.priceSale }}</td>
+                    <td><a href="{{ path('admin.product.edit', { id: product.id }) }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% endif %}
+{% endblock window %}

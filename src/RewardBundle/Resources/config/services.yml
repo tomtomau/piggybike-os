@@ -1,0 +1,28 @@
+services:
+    # Repositories
+
+    reward.reward_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - RewardBundle\Entity\Reward
+
+    reward.product_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - RewardBundle\Entity\Product
+
+    reward.product_category_service:
+        class: RewardBundle\Services\ProductCategoryService
+        arguments:
+            - "%commission_factory_redirect_base%"
+            - "@reward.product_repository"
+    reward.pushys:
+        class: RewardBundle\Services\PushysService
+        arguments:
+            - "@guzzle.client.commission_factory"
+            - "%commission_factory_url%"
+            - "@doctrine.orm.default_entity_manager"

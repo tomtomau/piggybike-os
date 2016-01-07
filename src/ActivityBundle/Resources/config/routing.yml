@@ -1,0 +1,33 @@
+#user.profile.view:
+#    path: /
+#    defaults: { _controller: UserBundle:Profile:view }
+#
+#activity.activity.list:
+#    path: /list
+#    defaults: { _controller: ActivityBundle:Activity:list }
+
+activity.activity.list:
+    path: /list/{pageId}
+    defaults: { _controller: ActivityBundle:Activity:list, pageId: 1 }
+
+activity.activity.edit:
+    path: /edit/{id}
+    defaults: { _controller: ActivityBundle:Activity:edit }
+
+activity.share.share:
+    path: /share
+    defaults: { _controller: ActivityBundle:Share:share }
+
+activity.share.month:
+    path: /share/{year}/{month}
+    defaults: { _controller: ActivityBundle:Share:shareMonth }
+
+activity.share.tweet:
+    path: /share/tweet
+    defaults: { _controller: ActivityBundle:Share:tweet }
+
+activity.activity.refresh:
+    path: /refresh/{id}
+    defaults: { _controller: ActivityBundle:Activity:refresh }
+    requirements:
+        id:  \d+

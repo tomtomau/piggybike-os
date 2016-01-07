@@ -1,0 +1,23 @@
+reward.reward.list:
+    path: /list
+    defaults: { _controller: RewardBundle:Reward:list }
+#
+#activity.activity.edit:
+#    path: /edit/{id}
+#    defaults: { _controller: ActivityBundle:Activity:edit }
+
+reward.reward.new:
+    path: /new
+    defaults: { _controller: RewardBundle:Reward:new }
+
+reward.reward.edit:
+    path: /edit/{id}
+    defaults: { _controller: RewardBundle:Reward:edit }
+
+reward.reward.delete:
+    path: /delete/{id}
+    defaults: { _controller: RewardBundle:Reward:delete }
+
+reward.promo.list:
+    path: /promos
+    defaults: { _controller: RewardBundle:Promo:list }

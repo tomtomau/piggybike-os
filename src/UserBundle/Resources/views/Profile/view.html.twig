@@ -1,0 +1,33 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>{{ app.user.isSetup ? "Settings" : "Setup" }}</h2>
+    <p class="lead">PiggyBike works by automatically classifying your rides to detect commutes and to automatically
+    track your savings. To be able to do this, we need to know the rough coordinates of your home and work, and an approximate cost
+    of a non-bike commute.</p>
+
+    {% set score = app.user.hasSetHome + app.user.hasSetWork + app.user.hasSetCost %}
+    <h3>Configuration</h3>
+    <br/>
+    <ul class="profile-options-list">
+        <li><a href="{{ path('user.profile.set_home') }}" class="btn btn-{{ app.user.homeLat is not null ? 'success' : 'warning' }}">Set Home</a></li>
+        <li><a href="{{ score > 0 ? path('user.profile.set_work') : "javascript:void(0)" }}" class="btn btn-{{ app.user.workLat is not null ? 'success' : 'warning' }} {{ score > 0 ? '' : 'btn-disabled' }}">Set Work</a></li>
+        <li><a href="{{ score > 0 ? path('user.profile.set_cost') : "javascript:void(0)" }}" class="btn btn-{{ app.user.cost is not null ? 'success' : 'warning' }} {{ score > 1 ? '' : 'btn-disabled' }}">Set Cost</a></li>
+    </ul>
+    {% if app.user.isSetup %}
+        <br/>
+        <h3>Reclassify all rides</h3>
+        <p class="lead">
+            If you've had difficulty setting up your location (i.e. if you selected the wrong location or cost in the setup), you can trigger a reclassification below. Note: this will unclassify
+            all of your rides and trigger a reclassification of your rides. If you only need to manually update one or two rides,
+            you can do this from the activity list.
+        </p>
+        <a href="{{ path('user.profile.reclassify') }}" class="btn btn-default">Reclassify</a>
+
+        <br/>
+        <br/>
+        <h3>Notifications Control</h3>
+        <p class="lead">Monitor the notifications/emails that are sent to you from PiggyBike</p>
+        <a href="{{ path('user.profile.notifications') }}" class="btn btn-default">Notifications <Settings></Settings></a>
+    {% endif %}
+{% endblock window %}

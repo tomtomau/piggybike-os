@@ -1,0 +1,22 @@
+{
+  "name": "piggybike",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tomtomau/piggybike",
+  "authors": [
+    "Tom Newby <me@tomnewby.net>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-google-maps": "~2.2.1",
+    "angular": "~1.4.8",
+    "angular-resource": "~1.4.8"
+  }
+}

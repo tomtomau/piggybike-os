@@ -1,0 +1,43 @@
+user.profile.view:
+    path: /
+    defaults: { _controller: UserBundle:Profile:view }
+
+user.profile.set_home:
+    path: /set-home
+    defaults: { _controller: UserBundle:Profile:home }
+
+user.profile.set_work:
+    path: /set-work
+    defaults: { _controller: UserBundle:Profile:work }
+
+user.profile.set_cost:
+    path: /set-cost
+    defaults: { _controller: UserBundle:Profile:setCost }
+
+user.profile.notifications:
+    path: /set-notifications
+    defaults: { _controller: UserBundle:Profile:setNotifications }
+
+user.profile.reclassify:
+    path: /reclassify
+    defaults: { _controller: UserBundle:Profile:reclassify }
+
+user.onboard.index:
+    path: /welcome
+    defaults: { _controller: UserBundle:Onboard:index }
+
+user.onboard.complete:
+    path: /complete
+    defaults: { _controller: UserBundle:Onboard:complete }
+
+user.onboard.api.points:
+    path: /api/points
+    defaults: { _controller: UserBundle:Onboard:getPointsOfInterest }
+
+user.mailer_preview.monthly:
+    path: /mailer-preview/monthly
+    defaults: { _controller: UserBundle:MailerPreview:monthlyPreview }
+
+user.mailer_preview.rewards_intro:
+    path: /mailer-preview/rewards_intro
+    defaults: { _controller: UserBundle:MailerPreview:rewardsIntro }

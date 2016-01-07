@@ -1,0 +1,84 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Promotions & Coupons</h2>
+    <p class="lead">
+        Here lives exclusive promotions and coupons for bike commuters! Want to see a particular promo? Drop me a line: <a
+                href="mailto:tom@piggy.bike">tom@piggy.bike</a>
+    </p>
+
+    {% if date('now') < date('2016-12-15 23:59:59+1000') %}
+        <div class="promos">
+            <div class="promo well">
+                <img src="http://www.wigglestatic.com/product-media/5360007390/conti-tube-race28-presta-80.jpg?w=73&h=73&a=7" alt="Continental Quality Road Long Valve Inner Tubes" style="float: left; margin-right: 1rem;">
+                <h3>Save up to 40% off Continental Quality Road Long Valve Inner Tubes</h3>
+                <p class="lead">
+                    These are some quality inner tubes from Continential, ranging from $6.99AUD at the time of writing.
+                </p>
+                <a href="//t.dgm-au.com/c/342127/192476/1397" class="btn btn-default" target="_blank">Go to Wiggle</a>
+            </div>
+            <div class="promo well">
+
+                <h3>Save A$25 off A$175 @ Wiggle.com.au!</h3>
+                <p class="lead">
+                    CLOTHING SPEND AND SAVE on all clothing including wetsuits, helmets and sunglasses! Limited time only. Terms and conditions apply.
+                    <br/>
+                    Included categories are:
+                </p>
+                <ul>
+                    <li>Cycle clothing</li>
+                    <li>Cycle shoes</li>
+                    <li>Cycle helmets</li>
+                    <li>Sunglasses</li>
+                    <li>Run Clothing</li>
+                    <li>Run shoes</li>
+                    <li>Tri clothing</li>
+                    <li>Swimwear</li>
+                    <li>Wetsuits</li>
+                    <li>Outdoor clothing</li>
+                    <li>Casual clothing</li>
+                </ul>
+
+                <div class="promo-details">
+                    <h4>Coupon Code:</h4>
+                    <span class="coupon-code">AUD1</span>
+                </div>
+
+                <a href="{{ wiggle_url }}" class="btn btn-default" target="_blank">Go To Wiggle</a>
+            </div>
+            <div class="promo well">
+
+                <h3>Save A$65 off A$350 @ Wiggle.com.au!</h3>
+                <p class="lead">
+                    CLOTHING SPEND AND SAVE on all clothing including wetsuits, helmets and sunglasses! Limited time only. Terms and conditions apply.
+                    <br/>
+                    Included categories are:
+                </p>
+
+                <ul>
+                    <li>Cycle clothing</li>
+                    <li>Cycle shoes</li>
+                    <li>Cycle helmets</li>
+                    <li>Sunglasses</li>
+                    <li>Run Clothing</li>
+                    <li>Run shoes</li>
+                    <li>Tri clothing</li>
+                    <li>Swimwear</li>
+                    <li>Wetsuits</li>
+                    <li>Outdoor clothing</li>
+                    <li>Casual clothing</li>
+                </ul>
+
+                <div class="promo-details">
+                    <h4>Coupon Code:</h4>
+                    <span class="coupon-code">AUD2</span>
+                </div>
+
+                <a href="{{ wiggle_url }}" class="btn btn-default" target="_blank">Go To Wiggle</a>
+            </div>
+        </div>
+    {% else %}
+        <p>No active coupon codes. Check Wiggle for promotions:</p>
+    {% endif %}
+
+{% endblock window %}

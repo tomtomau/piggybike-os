@@ -1,0 +1,39 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Welcome to PiggyBike!</h2>
+    <p class="lead">PiggyBike works by automatically classifying your rides to detect commutes and to automatically
+        track your savings. To be able to do this, we need to know the rough coordinates of your home and work, and an
+        approximate cost of a non-bike commute.</p>
+
+    <p>Once you've completed the checklist, we can automatically go back and classify your commutes. We've started
+        syncing your Strava activities since the start of this year, so we can assist you in setting your home and work.</p>
+
+    <a href="{{ path(continue_route) }}" class="btn btn-default">Setup</a>
+    <div class="clear"></div>
+    {% include 'UserBundle:Profile:_progress.html.twig' %}
+
+
+{% endblock window %}
+
+{% block mixpanel %}
+    {% if just_registered %}
+        {# We're not allowing identify #}
+        <script>
+            if (typeof mixpanel != "undefined") {
+                mixpanel.alias({{ app.user.id }});
+                mixpanel.track('Register');
+                mixpanel.track('Onboard');
+                mixpanel.people.set_once('Registered At', new Date());
+                mixpanel.people.set({{ app.user|people_properties|json_encode|raw }});
+            }
+        </script>
+    {% else %}
+        {{ parent() }} {# This fires off identify #}
+        <script>
+            if (typeof mixpanel != "undefined") {
+                mixpanel.track('Onboard');
+            }
+        </script>
+    {% endif %}
+{% endblock mixpanel %}

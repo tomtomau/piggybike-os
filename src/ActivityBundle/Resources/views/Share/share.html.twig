@@ -1,0 +1,44 @@
+{% extends 'app.html.twig' %}
+
+{% block window %}
+    <h2>Share on social</h2>
+    <p class="lead">Share how much you've saved with PiggyBike with your friends! Don't forget to follow PiggyBike on
+        <a href="{{ facebook_url }}">Facebook</a>,
+        <a href="{{ twitter_url }}">Twitter</a> or
+        <a href="{{ instagram_url }}">Instagram</a> for deals and competitions.
+    </p>
+    <p class="quote">
+        {{ messages.fb }}
+    </p>
+
+    <h3>Share via:</h3>
+    <br/>
+    <a class="btn btn-default" href="javascript:shareFacebook()"><span class="icon icon-facebook"></span>Facebook</a>
+    <a class="btn btn-default" href="{{ path('activity.share.tweet') }}"><span class="icon icon-twitter"></span> Twitter</a>
+
+    <br/>
+    <br/>
+
+    <a class="btn btn-neutral" href="{{ path('activity.activity.list') }}">Return to activity list</a>
+    <script>
+        function shareFacebook() {
+            if ('undefined' !== typeof mixpanel) {
+                mixpanel.track('Share', { 'Platform': 'Facebook' });
+            }
+
+            FB.ui({
+                method: 'feed',
+                link: 'http://piggy.bike/',
+                name: "{{ messages.fb|e('js') }}",
+                description: "{{ description|e('js') }}",
+                picture: "{{ app.request.getSchemeAndHttpHost() ~ asset('images/app/images/fb-banner.png') }}"
+            }, function(response){
+                if (response !== null && response.hasOwnProperty('post_id')) {
+                    mixpanel.track('FacebookShareSuccess', {
+                        'post_id': response.post_id
+                    });
+                }
+            });
+        }
+    </script>
+{% endblock window %}

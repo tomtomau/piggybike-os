@@ -1,0 +1,74 @@
+@import 'vars';
+@import 'mixins';
+
+.btn {
+  padding: 7px 17px;
+  border-radius: 3px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  border-style: none;
+
+  .transition(background 0.2s);
+
+  &:hover, &:visited, &:active{
+    color: inherit;
+  }
+
+  &.btn-default {
+    background-color: @mainColor;
+    color: white;
+
+    &:hover {
+      background-color: darken(@mainColor, 4%);
+    }
+  }
+
+  &.btn-strava {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  &.btn-orange {
+    background: #FC4C02;
+    color: white;
+  }
+
+  &.btn-warning {
+    background: @warning;
+    color: black;
+    border: 1px solid #DCC247;
+
+    &.btn-disabled {
+      opacity: 0.5;
+      color: #A99539;
+      cursor: default;
+    }
+  }
+
+  &.btn-success, &.btn-green{
+    background: @boldSuccess;
+    color: white;
+    border: 1px solid darken(@boldSuccess, 2%);
+  }
+
+  &.btn-danger {
+    background: #EF3F17;
+    color: white;
+  }
+
+  &.btn-smaller {
+    font-size: 14px;
+  }
+
+  &.btn-neutral {
+    background: @neutral;
+    color: #2F2E2E;
+  }
+
+  span.icon {
+    margin-left: -10px;
+  }
+}
